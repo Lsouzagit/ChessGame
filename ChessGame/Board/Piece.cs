@@ -18,5 +18,10 @@ namespace ChessGame.board
             this.Color = color;
             this.QntMoves = 0;
         }
+
+        public void sumQndMoves()
+        {
+            QntMoves++;
+        }
     }
 }
