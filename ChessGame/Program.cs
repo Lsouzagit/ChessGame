@@ -13,22 +13,44 @@ namespace ChessGame
 
                 while (!game.gamefinish)
                 {
-                    Console.Clear();
-                    Tela.printscreen(game.board);
+                    try
+                    {
+                        Console.Clear();
+                        Tela.printscreen(game.board);
+                        Console.WriteLine();
+                        Console.WriteLine("Turn: " + game.turn);
+                        Console.WriteLine("Waiting " + game.actualPlayer + " make the move");
 
-                    Console.WriteLine();
-                    Console.Write("From: ");
-                    Position from = Tela.readChessPosition().toPosition();
-                    Console.Write("To: ");
-                    Position to = Tela.readChessPosition().toPosition();
-                    game.executeMove(from, to);
-                }
-                
+                        //ask the user wich piece he/her want move
+                        Console.WriteLine();
+                        Console.Write("From: ");
+                        Position from = Tela.readChessPosition().toPosition();
+                        game.checkfromposition(from);
+
+                        //print possible places that that piece can be moved
+                        bool[,] possiblepositions = game.board.piece(from).possiblemoves();
+                        Console.Clear();
+                        Tela.printscreen(game.board, possiblepositions);
+                        Console.WriteLine();
+
+                        //as to where the piece should go
+                        Console.Write("To: ");
+                        Position to = Tela.readChessPosition().toPosition();
+                        game.checktoposition(from, to);
+                        game.domove(from, to);
+                    }
+                    catch(BoardException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
+                }               
                 
             }
             catch(BoardException e)
             {
                 Console.WriteLine(e.Message);
+                Console.ReadLine();
             }
         }
     }

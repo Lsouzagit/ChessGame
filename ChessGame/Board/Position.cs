@@ -14,6 +14,12 @@ namespace ChessGame.board
             this.column = Column;
         }
 
+        public void definevalue(int line, int column)
+        {
+            this.line = line;
+            this.column = column;
+        }
+
         //To print the position on screen
         public override string ToString()
         {
