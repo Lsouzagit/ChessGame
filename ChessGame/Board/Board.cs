@@ -16,5 +16,15 @@ namespace ChessGame.board
             this.columns = colums;
             pieces = new Piece[lines, colums];
         }
+        public Piece piece(int line, int column)
+        {
+            return pieces[line, column];
+        }
+
+        public void placepiece(Piece p, Position pos)
+        {
+            pieces[pos.line, pos.column] = p;
+            p.Position = pos;
+        }
     }
 }
